@@ -25,14 +25,18 @@
       width: 100%;
       max-width: 900px;
       margin: 20px auto;
-      overflow: hidden;
       border: 3px solid #ff00a2;
       border-radius: 8px;
-      background-color: #000;
-      aspect-ratio: 16 / 9;
+      overflow: hidden;
     }
 
-    .video-container iframe {
+    .video-responsive {
+      position: relative;
+      padding-top: 56.25%; /* 16:9 */
+      height: 0;
+    }
+
+    .video-responsive iframe {
       position: absolute;
       top: 0;
       left: 0;
@@ -88,14 +92,15 @@
     🔊 Por favor, certifique-se de que o som esteja ligado.
   </div>
 
-  <div class="video-container" id="videoContainer">
-    <iframe src="https://player.vimeo.com/video/1107309179?badge=0&autopause=0&player_id=0&app_id=58479"
-            allow="autoplay; fullscreen; picture-in-picture"
-            referrerpolicy="strict-origin-when-cross-origin"
-            title="Treinamento Gratuito - Introdução.">
-    </iframe>
+  <div class="video-container">
+    <div class="video-responsive">
+      <iframe src="https://player.vimeo.com/video/1107309179?badge=0&autopause=0&player_id=0&app_id=58479"
+              allow="autoplay; fullscreen; picture-in-picture"
+              referrerpolicy="strict-origin-when-cross-origin"
+              title="Treinamento Gratuito - Introdução.">
+      </iframe>
+    </div>
 
-    <!-- TARJA DE ORIENTAÇÃO -->
     <div class="rotate-warning" id="rotateWarning">
       📱 Por favor, gire a tela para uma melhor experiência
     </div>
