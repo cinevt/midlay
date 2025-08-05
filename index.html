@@ -35,6 +35,16 @@
       border-radius: 8px;
       overflow: hidden;
       aspect-ratio: 16 / 9;
+      transition: all 0.3s ease;
+    }
+
+    .video-container.fullscreen-mobile {
+      width: 100vw;
+      height: 100vh;
+      max-width: none;
+      border: none;
+      border-radius: 0;
+      aspect-ratio: unset;
     }
 
     .video-container iframe {
@@ -62,7 +72,7 @@
 
     @keyframes blink {
       0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
+      50% { opacity: 0.65; }
     }
 
     .watermark-container {
@@ -116,21 +126,27 @@
   </div>
 
   <script>
-    function updateWarning() {
+    function updateLayout() {
       const warning = document.getElementById("rotateWarning");
+      const videoContainer = document.getElementById("videoContainer");
       const isMobile = window.innerWidth <= 768;
       const isPortrait = window.innerHeight > window.innerWidth;
 
       if (isMobile && isPortrait) {
         warning.style.display = "block";
+        videoContainer.classList.remove("fullscreen-mobile");
+      } else if (isMobile && !isPortrait) {
+        warning.style.display = "none";
+        videoContainer.classList.add("fullscreen-mobile");
       } else {
         warning.style.display = "none";
+        videoContainer.classList.remove("fullscreen-mobile");
       }
     }
 
-    window.addEventListener("load", updateWarning);
-    window.addEventListener("resize", updateWarning);
-    window.addEventListener("orientationchange", updateWarning);
+    window.addEventListener("load", updateLayout);
+    window.addEventListener("resize", updateLayout);
+    window.addEventListener("orientationchange", updateLayout);
   </script>
 
   <script src="https://player.vimeo.com/api/player.js"></script>
