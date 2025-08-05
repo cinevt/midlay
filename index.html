@@ -4,27 +4,32 @@
   <meta charset="UTF-8">
   <title>Seu vídeo já começou</title>
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
       background-color: #000;
       font-family: Arial, sans-serif;
       color: white;
-      text-align: center;
+      height: 100%;
+      width: 100%;
     }
 
     .audio-warning {
       margin-top: 20px;
       font-size: 16px;
+      text-align: center;
     }
 
     .video-container {
-      position: relative;
+      width: 100vw;
+      height: 56.25vw; /* Proporção 16:9 */
       max-width: 900px;
-      margin: 40px auto;
+      max-height: 506.25px; /* 900 * 9/16 */
+      margin: 20px auto;
+      position: relative;
       border: 3px solid #ff00a2;
       border-radius: 8px;
       overflow: hidden;
-      aspect-ratio: 16 / 9;
     }
 
     iframe {
@@ -32,6 +37,18 @@
       height: 100%;
       border: none;
       display: block;
+    }
+
+    .watermark-container {
+      padding: 40px 0;
+    }
+
+    .watermark {
+      color: rgba(255, 255, 255, 0.05); /* super translúcido */
+      font-size: 24px;
+      text-align: center;
+      margin: 20px 0;
+      user-select: none;
     }
   </style>
 </head>
@@ -47,6 +64,20 @@
             referrerpolicy="strict-origin-when-cross-origin"
             title="Treinamento Gratuito - Introdução.">
     </iframe>
+  </div>
+
+  <div class="watermark-container">
+    <!-- Repete várias vezes -->
+    <div class="watermark">Em breve próximas aulas</div>
+    <div class="watermark">Em breve próximas aulas</div>
+    <div class="watermark">Em breve próximas aulas</div>
+    <div class="watermark">Em breve próximas aulas</div>
+    <div class="watermark">Em breve próximas aulas</div>
+    <div class="watermark">Em breve próximas aulas</div>
+    <div class="watermark">Em breve próximas aulas</div>
+    <div class="watermark">Em breve próximas aulas</div>
+    <div class="watermark">Em breve próximas aulas</div>
+    <div class="watermark">Em breve próximas aulas</div>
   </div>
 
   <script src="https://player.vimeo.com/api/player.js"></script>
