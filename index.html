@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Seu vídeo já começou</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     html, body {
       margin: 0;
@@ -10,23 +11,21 @@
       background-color: #000;
       font-family: Arial, sans-serif;
       color: white;
-      height: 100%;
-      width: 100%;
     }
 
     .audio-warning {
       font-size: 16px;
       text-align: center;
       padding: 10px;
+      background-color: #111;
     }
 
     .video-container {
-      width: 100vw;
-      height: 56.25vw; /* Proporção 16:9 */
-      max-width: 900px;
-      max-height: 506.25px;
-      margin: 20px auto;
       position: relative;
+      width: 100vw;
+      max-width: 900px;
+      aspect-ratio: 16 / 9;
+      margin: 20px auto;
       border: 3px solid #ff00a2;
       border-radius: 8px;
       overflow: hidden;
@@ -36,11 +35,10 @@
       width: 100%;
       height: 100%;
       border: none;
-      display: block;
     }
 
     .rotate-warning {
-      position: fixed;
+      position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
@@ -75,40 +73,30 @@
 
     @media screen and (max-width: 768px) {
       .audio-warning {
-        font-size: 22px;
-        width: 100%;
-        white-space: nowrap;
-        box-sizing: border-box;
-        padding: 15px 10px;
-        background-color: #111;
-        text-align: center;
-        margin: 0;
+        font-size: 20px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- TARJA ROSA FIXA EM CIMA DO VÍDEO (visível no celular em pé) -->
-  <div class="rotate-warning" id="rotateWarning">
-    📱 Por favor, gire a tela para uma melhor experiência
-  </div>
-
-  <!-- CONTAINER DO VÍDEO -->
-  <div class="video-container">
-    <iframe src="https://player.vimeo.com/video/1107309179?badge=0&autopause=0&player_id=0&app_id=58479"
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            title="Treinamento Gratuito - Introdução.">
-    </iframe>
-  </div>
-
-  <!-- AVISO DE SOM -->
   <div class="audio-warning">
     🔊 Por favor, certifique-se de que o som esteja ligado.
   </div>
 
-  <!-- MARCAS D'ÁGUA -->
+  <div class="video-container" id="videoContainer">
+    <iframe src="https://player.vimeo.com/video/1107309179?badge=0&autopause=0&player_id=0&app_id=58479"
+            allow="autoplay; fullscreen; picture-in-picture"
+            referrerpolicy="strict-origin-when-cross-origin"
+            title="Treinamento Gratuito - Introdução.">
+    </iframe>
+
+    <!-- TARJA DE ORIENTAÇÃO -->
+    <div class="rotate-warning" id="rotateWarning">
+      📱 Por favor, gire a tela para uma melhor experiência
+    </div>
+  </div>
+
   <div class="watermark-container">
     <div class="watermark">Em breve próximas aulas</div>
     <div class="watermark">Em breve próximas aulas</div>
@@ -122,9 +110,8 @@
     <div class="watermark">Em breve próximas aulas</div>
   </div>
 
-  <!-- SCRIPTS -->
   <script>
-    function checkOrientation() {
+    function updateWarning() {
       const warning = document.getElementById("rotateWarning");
       const isMobile = window.innerWidth <= 768;
       const isPortrait = window.innerHeight > window.innerWidth;
@@ -136,11 +123,12 @@
       }
     }
 
-    window.addEventListener("load", checkOrientation);
-    window.addEventListener("resize", checkOrientation);
-    window.addEventListener("orientationchange", checkOrientation);
+    window.addEventListener("load", updateWarning);
+    window.addEventListener("resize", updateWarning);
+    window.addEventListener("orientationchange", updateWarning);
   </script>
 
   <script src="https://player.vimeo.com/api/player.js"></script>
 </body>
 </html>
+
