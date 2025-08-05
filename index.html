@@ -39,6 +39,28 @@
       display: block;
     }
 
+    .rotate-warning {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #ff00a2;
+      color: white;
+      font-size: 20px;
+      padding: 15px 25px;
+      border-radius: 8px;
+      text-align: center;
+      z-index: 10;
+      display: none;
+      white-space: nowrap;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
     .watermark-container {
       padding: 40px 0;
     }
@@ -49,29 +71,6 @@
       text-align: center;
       margin: 20px 0;
       user-select: none;
-    }
-
-    /* Mensagem "Gire a tela" */
-    .rotate-message {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: rgba(0, 0, 0, 0.85);
-      padding: 20px 30px;
-      border-radius: 12px;
-      font-size: 22px;
-      color: #fff;
-      text-align: center;
-      z-index: 9999;
-      animation: blink 1s infinite;
-      display: none;
-      pointer-events: none;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
     }
 
     /* Estilo só para celular */
@@ -91,21 +90,22 @@
 </head>
 <body>
 
-  <!-- MENSAGEM DE GIRAR A TELA -->
-  <div class="rotate-message" id="rotateMessage">📱 Por favor, gire a tela para uma melhor experiência</div>
-
-  <!-- AVISO DE SOM -->
-  <div class="audio-warning">
-    🔊 Por favor, certifique-se de que o som esteja ligado.
-  </div>
-
-  <!-- VÍDEO -->
+  <!-- AVISO GIRAR TELA -->
   <div class="video-container">
+    <div class="rotate-warning" id="rotateWarning">
+      📱 Por favor, gire a tela para uma melhor experiência
+    </div>
+
     <iframe src="https://player.vimeo.com/video/1107309179?badge=0&autopause=0&player_id=0&app_id=58479"
             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
             referrerpolicy="strict-origin-when-cross-origin"
             title="Treinamento Gratuito - Introdução.">
     </iframe>
+  </div>
+
+  <!-- AVISO DE SOM -->
+  <div class="audio-warning">
+    🔊 Por favor, certifique-se de que o som esteja ligado.
   </div>
 
   <!-- MARCAS D'ÁGUA -->
@@ -125,18 +125,17 @@
   <!-- SCRIPTS -->
   <script>
     function checkOrientation() {
-      const rotateMessage = document.getElementById("rotateMessage");
+      const warning = document.getElementById("rotateWarning");
       const isPortrait = window.innerHeight > window.innerWidth;
       const isMobile = window.innerWidth <= 768;
 
       if (isPortrait && isMobile) {
-        rotateMessage.style.display = "block";
+        warning.style.display = "block";
       } else {
-        rotateMessage.style.display = "none";
+        warning.style.display = "none";
       }
     }
 
-    // Verifica ao carregar e ao mudar a orientação
     window.addEventListener("load", checkOrientation);
     window.addEventListener("resize", checkOrientation);
     window.addEventListener("orientationchange", checkOrientation);
@@ -145,4 +144,3 @@
   <script src="https://player.vimeo.com/api/player.js"></script>
 </body>
 </html>
-
