@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Seu vídeo já começou</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <style>
-    html, body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       background-color: #000;
       font-family: Arial, sans-serif;
       color: white;
+      overflow-x: hidden;
     }
 
     .audio-warning {
+      width: 100%;
       font-size: 16px;
       text-align: center;
       padding: 10px;
@@ -24,22 +30,14 @@
       position: relative;
       width: 100%;
       max-width: 900px;
-      margin: 20px auto;
+      margin: 0 auto;
       border: 3px solid #ff00a2;
       border-radius: 8px;
       overflow: hidden;
+      aspect-ratio: 16 / 9;
     }
 
-    .video-responsive {
-      position: relative;
-      padding-top: 56.25%; /* 16:9 */
-      height: 0;
-    }
-
-    .video-responsive iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
+    .video-container iframe {
       width: 100%;
       height: 100%;
       border: none;
@@ -92,14 +90,12 @@
     🔊 Por favor, certifique-se de que o som esteja ligado.
   </div>
 
-  <div class="video-container">
-    <div class="video-responsive">
-      <iframe src="https://player.vimeo.com/video/1107309179?badge=0&autopause=0&player_id=0&app_id=58479"
-              allow="autoplay; fullscreen; picture-in-picture"
-              referrerpolicy="strict-origin-when-cross-origin"
-              title="Treinamento Gratuito - Introdução.">
-      </iframe>
-    </div>
+  <div class="video-container" id="videoContainer">
+    <iframe src="https://player.vimeo.com/video/1107309179?badge=0&autopause=0&player_id=0&app_id=58479"
+            allow="autoplay; fullscreen; picture-in-picture"
+            referrerpolicy="strict-origin-when-cross-origin"
+            title="Treinamento Gratuito - Introdução.">
+    </iframe>
 
     <div class="rotate-warning" id="rotateWarning">
       📱 Por favor, gire a tela para uma melhor experiência
@@ -140,4 +136,3 @@
   <script src="https://player.vimeo.com/api/player.js"></script>
 </body>
 </html>
-
