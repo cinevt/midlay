@@ -40,25 +40,25 @@
     }
 
     .rotate-warning {
-      position: absolute;
+      position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       background-color: #ff00a2;
       color: white;
-      font-size: 20px;
+      font-size: 18px;
       padding: 15px 25px;
       border-radius: 8px;
       text-align: center;
-      z-index: 10;
+      z-index: 9999;
       display: none;
-      white-space: nowrap;
       animation: blink 1s infinite;
+      white-space: nowrap;
     }
 
     @keyframes blink {
       0%, 100% { opacity: 1; }
-      50% { opacity: 0.6; }
+      50% { opacity: 0.5; }
     }
 
     .watermark-container {
@@ -73,7 +73,6 @@
       user-select: none;
     }
 
-    /* Estilo só para celular */
     @media screen and (max-width: 768px) {
       .audio-warning {
         font-size: 22px;
@@ -90,12 +89,13 @@
 </head>
 <body>
 
-  <!-- AVISO GIRAR TELA -->
-  <div class="video-container">
-    <div class="rotate-warning" id="rotateWarning">
-      📱 Por favor, gire a tela para uma melhor experiência
-    </div>
+  <!-- TARJA ROSA FIXA EM CIMA DO VÍDEO (visível no celular em pé) -->
+  <div class="rotate-warning" id="rotateWarning">
+    📱 Por favor, gire a tela para uma melhor experiência
+  </div>
 
+  <!-- CONTAINER DO VÍDEO -->
+  <div class="video-container">
     <iframe src="https://player.vimeo.com/video/1107309179?badge=0&autopause=0&player_id=0&app_id=58479"
             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
             referrerpolicy="strict-origin-when-cross-origin"
@@ -126,10 +126,10 @@
   <script>
     function checkOrientation() {
       const warning = document.getElementById("rotateWarning");
-      const isPortrait = window.innerHeight > window.innerWidth;
       const isMobile = window.innerWidth <= 768;
+      const isPortrait = window.innerHeight > window.innerWidth;
 
-      if (isPortrait && isMobile) {
+      if (isMobile && isPortrait) {
         warning.style.display = "block";
       } else {
         warning.style.display = "none";
