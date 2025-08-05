@@ -60,7 +60,7 @@
       background-color: rgba(0, 0, 0, 0.85);
       padding: 20px 30px;
       border-radius: 12px;
-      font-size: 22px;
+      font-size: 24px;
       color: #fff;
       text-align: center;
       z-index: 9999;
@@ -73,12 +73,11 @@
       50% { opacity: 0; }
     }
 
-    /* Ajustes só para celular */
+    /* Estilo só para celular */
     @media screen and (max-width: 768px) {
       .audio-warning {
         font-size: 22px;
         width: 100%;
-        display: block;
         white-space: nowrap;
         box-sizing: border-box;
         padding: 15px 10px;
@@ -91,14 +90,15 @@
 </head>
 <body>
 
-  <div class="rotate-message" id="rotateMsg">
-    📱 Vire a tela
-  </div>
+  <!-- MENSAGEM DE VIRE A TELA -->
+  <div class="rotate-message" id="rotateMessage">📱 Vire a tela</div>
 
+  <!-- AVISO DE SOM -->
   <div class="audio-warning">
     🔊 Por favor, certifique-se de que o som esteja ligado.
   </div>
 
+  <!-- VÍDEO -->
   <div class="video-container">
     <iframe src="https://player.vimeo.com/video/1107309179?badge=0&autopause=0&player_id=0&app_id=58479"
             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
@@ -107,6 +107,7 @@
     </iframe>
   </div>
 
+  <!-- MARCAS D'ÁGUA -->
   <div class="watermark-container">
     <div class="watermark">Em breve próximas aulas</div>
     <div class="watermark">Em breve próximas aulas</div>
@@ -120,26 +121,30 @@
     <div class="watermark">Em breve próximas aulas</div>
   </div>
 
-  <script src="https://player.vimeo.com/api/player.js"></script>
   <script>
-    // Verifica se está em modo retrato no celular
-    function showRotateMessageIfNeeded() {
+    function checkOrientation() {
+      const rotateMessage = document.getElementById("rotateMessage");
       const isPortrait = window.innerHeight > window.innerWidth;
-      const isMobile = window.innerWidth <= 768;
-      const msg = document.getElementById('rotateMsg');
 
-      if (isPortrait && isMobile) {
-        msg.style.display = 'block';
+      if (isPortrait && window.innerWidth <= 768) {
+        rotateMessage.style.display = "block";
+
         setTimeout(() => {
-          msg.style.display = 'none';
+          rotateMessage.style.display = "none";
         }, 2000);
+      } else {
+        rotateMessage.style.display = "none";
       }
     }
 
-    window.addEventListener('load', showRotateMessageIfNeeded);
-    window.addEventListener('orientationchange', showRotateMessageIfNeeded);
-    window.addEventListener('resize', showRotateMessageIfNeeded);
+    // Verifica no carregamento e quando girar
+    window.addEventListener("load", checkOrientation);
+    window.addEventListener("resize", checkOrientation);
+    window.addEventListener("orientationchange", checkOrientation);
   </script>
+
+  <script src="https://player.vimeo.com/api/player.js"></script>
 </body>
 </html>
+
 
