@@ -15,7 +15,6 @@
     }
 
     .audio-warning {
-      margin-top: 20px;
       font-size: 16px;
       text-align: center;
       padding: 10px;
@@ -23,7 +22,7 @@
 
     .video-container {
       width: 100vw;
-      height: 56.25vw; /* Proporção 16:9 */
+      height: 56.25vw; /* 16:9 */
       max-width: 900px;
       max-height: 506.25px;
       margin: 20px auto;
@@ -52,15 +51,18 @@
       user-select: none;
     }
 
-    /* ====== AJUSTES APENAS PARA CELULAR ====== */
-    @media (max-width: 768px) {
+    /* ===== SOMENTE CELULAR ===== */
+    @media screen and (max-width: 768px) {
       .audio-warning {
-        font-size: 18px;
-        width: 100vw;
+        font-size: 22px;
+        width: 100%;
+        display: block;
         white-space: nowrap;
         box-sizing: border-box;
         padding: 15px 10px;
         background-color: #111;
+        text-align: center;
+        margin: 0;
       }
     }
   </style>
