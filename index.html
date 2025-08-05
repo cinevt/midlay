@@ -22,7 +22,7 @@
 
     .video-container {
       width: 100vw;
-      height: 56.25vw; /* 16:9 */
+      height: 56.25vw; /* Proporção 16:9 */
       max-width: 900px;
       max-height: 506.25px;
       margin: 20px auto;
@@ -51,7 +51,29 @@
       user-select: none;
     }
 
-    /* ===== SOMENTE CELULAR ===== */
+    /* Mensagem "Vire a tela" */
+    .rotate-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.85);
+      padding: 20px 30px;
+      border-radius: 12px;
+      font-size: 22px;
+      color: #fff;
+      text-align: center;
+      z-index: 9999;
+      animation: blink 1s infinite;
+      display: none;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Ajustes só para celular */
     @media screen and (max-width: 768px) {
       .audio-warning {
         font-size: 22px;
@@ -68,6 +90,10 @@
   </style>
 </head>
 <body>
+
+  <div class="rotate-message" id="rotateMsg">
+    📱 Vire a tela
+  </div>
 
   <div class="audio-warning">
     🔊 Por favor, certifique-se de que o som esteja ligado.
@@ -95,5 +121,25 @@
   </div>
 
   <script src="https://player.vimeo.com/api/player.js"></script>
+  <script>
+    // Verifica se está em modo retrato no celular
+    function showRotateMessageIfNeeded() {
+      const isPortrait = window.innerHeight > window.innerWidth;
+      const isMobile = window.innerWidth <= 768;
+      const msg = document.getElementById('rotateMsg');
+
+      if (isPortrait && isMobile) {
+        msg.style.display = 'block';
+        setTimeout(() => {
+          msg.style.display = 'none';
+        }, 2000);
+      }
+    }
+
+    window.addEventListener('load', showRotateMessageIfNeeded);
+    window.addEventListener('orientationchange', showRotateMessageIfNeeded);
+    window.addEventListener('resize', showRotateMessageIfNeeded);
+  </script>
 </body>
 </html>
+
