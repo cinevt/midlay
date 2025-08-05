@@ -51,7 +51,7 @@
       user-select: none;
     }
 
-    /* Mensagem "Vire a tela" */
+    /* Mensagem "Gire a tela" */
     .rotate-message {
       position: fixed;
       top: 50%;
@@ -60,12 +60,13 @@
       background-color: rgba(0, 0, 0, 0.85);
       padding: 20px 30px;
       border-radius: 12px;
-      font-size: 24px;
+      font-size: 22px;
       color: #fff;
       text-align: center;
       z-index: 9999;
       animation: blink 1s infinite;
       display: none;
+      pointer-events: none;
     }
 
     @keyframes blink {
@@ -90,8 +91,8 @@
 </head>
 <body>
 
-  <!-- MENSAGEM DE VIRE A TELA -->
-  <div class="rotate-message" id="rotateMessage">📱 Vire a tela</div>
+  <!-- MENSAGEM DE GIRAR A TELA -->
+  <div class="rotate-message" id="rotateMessage">📱 Por favor, gire a tela para uma melhor experiência</div>
 
   <!-- AVISO DE SOM -->
   <div class="audio-warning">
@@ -121,23 +122,21 @@
     <div class="watermark">Em breve próximas aulas</div>
   </div>
 
+  <!-- SCRIPTS -->
   <script>
     function checkOrientation() {
       const rotateMessage = document.getElementById("rotateMessage");
       const isPortrait = window.innerHeight > window.innerWidth;
+      const isMobile = window.innerWidth <= 768;
 
-      if (isPortrait && window.innerWidth <= 768) {
+      if (isPortrait && isMobile) {
         rotateMessage.style.display = "block";
-
-        setTimeout(() => {
-          rotateMessage.style.display = "none";
-        }, 2000);
       } else {
         rotateMessage.style.display = "none";
       }
     }
 
-    // Verifica no carregamento e quando girar
+    // Verifica ao carregar e ao mudar a orientação
     window.addEventListener("load", checkOrientation);
     window.addEventListener("resize", checkOrientation);
     window.addEventListener("orientationchange", checkOrientation);
@@ -146,5 +145,4 @@
   <script src="https://player.vimeo.com/api/player.js"></script>
 </body>
 </html>
-
 
