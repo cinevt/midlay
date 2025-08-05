@@ -18,13 +18,14 @@
       margin-top: 20px;
       font-size: 16px;
       text-align: center;
+      padding: 10px;
     }
 
     .video-container {
       width: 100vw;
       height: 56.25vw; /* Proporção 16:9 */
       max-width: 900px;
-      max-height: 506.25px; /* 900 * 9/16 */
+      max-height: 506.25px;
       margin: 20px auto;
       position: relative;
       border: 3px solid #ff00a2;
@@ -44,11 +45,23 @@
     }
 
     .watermark {
-      color: rgba(255, 255, 255, 0.05); /* super translúcido */
+      color: rgba(255, 255, 255, 0.05);
       font-size: 24px;
       text-align: center;
       margin: 20px 0;
       user-select: none;
+    }
+
+    /* ====== AJUSTES APENAS PARA CELULAR ====== */
+    @media (max-width: 768px) {
+      .audio-warning {
+        font-size: 18px;
+        width: 100vw;
+        white-space: nowrap;
+        box-sizing: border-box;
+        padding: 15px 10px;
+        background-color: #111;
+      }
     }
   </style>
 </head>
@@ -67,7 +80,6 @@
   </div>
 
   <div class="watermark-container">
-    <!-- Repete várias vezes -->
     <div class="watermark">Em breve próximas aulas</div>
     <div class="watermark">Em breve próximas aulas</div>
     <div class="watermark">Em breve próximas aulas</div>
