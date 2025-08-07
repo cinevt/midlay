@@ -102,13 +102,14 @@
       cursor: not-allowed;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.5s ease, box-shadow 0.3s ease;
     }
 
     .btn-aula1.active {
       opacity: 1;
       pointer-events: auto;
       cursor: pointer;
+      box-shadow: 0 0 12px #ff00a2;
     }
 
     @media screen and (max-width: 768px) {
@@ -173,17 +174,18 @@
         videoContainer.classList.remove("fullscreen-mobile");
       }
 
-      // Ocultar a tarja rosa após 10 segundos
+      // Oculta tarja rosa após 10 segundos
       setTimeout(() => {
         warning.style.display = "none";
       }, 10000);
     }
 
-    // Ativar botão após 2 minutos
     window.addEventListener("load", () => {
+      updateLayout();
+
       const btn = document.getElementById("btnAula1");
 
-      // Mostra o botão visualmente após 2s (ou imediatamente se preferir)
+      // Mostra o botão com opacidade após 2 segundos
       setTimeout(() => {
         btn.style.opacity = "1";
       }, 2000);
@@ -198,7 +200,7 @@
         if (btn.classList.contains("active")) {
           window.location.href = "https://midlay.site/aula1";
         } else {
-          alert("⏳ Aguarde o fim da introdução.");
+          alert("🚫 Por favor, primeiro termine a introdução.");
         }
       });
     });
