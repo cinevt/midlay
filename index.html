@@ -87,6 +87,30 @@
       user-select: none;
     }
 
+    .btn-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .btn-aula1 {
+      background-color: #ff00a2;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: not-allowed;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .btn-aula1.active {
+      opacity: 1;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+
     @media screen and (max-width: 768px) {
       .audio-warning {
         font-size: 20px;
@@ -112,6 +136,12 @@
     </div>
   </div>
 
+  <!-- BOTÃO -->
+  <div class="btn-container">
+    <button class="btn-aula1" id="btnAula1">Assistir Aula 1</button>
+  </div>
+
+  <!-- MARCAS D'ÁGUA -->
   <div class="watermark-container">
     <div class="watermark">Em breve próximas aulas</div>
     <div class="watermark">Em breve próximas aulas</div>
@@ -142,9 +172,37 @@
         warning.style.display = "none";
         videoContainer.classList.remove("fullscreen-mobile");
       }
+
+      // Ocultar a tarja rosa após 10 segundos
+      setTimeout(() => {
+        warning.style.display = "none";
+      }, 10000);
     }
 
-    window.addEventListener("load", updateLayout);
+    // Ativar botão após 2 minutos
+    window.addEventListener("load", () => {
+      const btn = document.getElementById("btnAula1");
+
+      // Mostra o botão visualmente após 2s (ou imediatamente se preferir)
+      setTimeout(() => {
+        btn.style.opacity = "1";
+      }, 2000);
+
+      // Torna o botão clicável após 2 minutos
+      setTimeout(() => {
+        btn.classList.add("active");
+      }, 120000);
+
+      // Comportamento do clique
+      btn.addEventListener("click", () => {
+        if (btn.classList.contains("active")) {
+          window.location.href = "https://midlay.site/aula1";
+        } else {
+          alert("⏳ Aguarde o fim da introdução.");
+        }
+      });
+    });
+
     window.addEventListener("resize", updateLayout);
     window.addEventListener("orientationchange", updateLayout);
   </script>
